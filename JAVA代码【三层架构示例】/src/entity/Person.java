@@ -10,6 +10,26 @@ public class Person {
     private String eamil;
     private String address;
 
+    public Person() {
+    }
+
+    public Person( String name, int age, Date bornDate, String eamil, String address) {
+        this.name = name;
+        this.age = age;
+        this.bornDate = bornDate;
+        this.eamil = eamil;
+        this.address = address;
+    }
+
+    public Person(int id, String name, int age, Date bornDate, String eamil, String address) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.bornDate = bornDate;
+        this.eamil = eamil;
+        this.address = address;
+    }
+
     public int getId() {
         return id;
     }
