@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+
+<!--
+  - This is the Cocoon web-app configurations file
+  -
+  - $Id$
+  -->
+<web-app version="2.4"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+
+    <listener>
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+    </listener>
+
+    <!--此过滤器会进行request.serCharactorEncoding("utf-8")-->
+    <filter>
+        <filter-name>encoding</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+    <!--现在有两个工厂同时存在，
+
+    第一个是SpringMVC工厂,是由前端控制器启动的，在项目启动时启动，工厂中生产Controller及
+    相关组件，如视图解析器，异常解析器，拦截器等，都是和Controller相关的东西
+
+    第二个工厂是Spring工厂，其中生产Service\dao以及相关的组件，如sqlSessionFactory,连接池，事务管理组件
+
+    -->
+
+    <!--MVC前端控制器-->
+ <servlet>
+   <servlet-name>mvc</servlet-name>
+   <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+   <init-param>
+     <param-name>contextConfigLocation</param-name>
+     <param-value>classpath:springmvc.xml</param-value>
+   </init-param>
+ </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>mvc</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+
+
+    <!--在项目启动时由前端控制器生成Controller,Spring工厂也需要在项目启动时一起启动起来，下面的配置
+    可以在项目启动时启动Spring工厂-->
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:applicationContext.xml</param-value>
+    </context-param>
+
+</web-app>
+        
