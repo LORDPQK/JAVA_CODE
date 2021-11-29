@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf8" ?>
+    <beans xmlns="http://www.springframework.org/schema/beans"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+           xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+           xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:task="http://www.springframework.org/schema/task"
+           xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+        http://www.springframework.org/schema/task
+        http://www.springframework.org/schema/task/spring-task-3.1.xsd">
+<!--<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http:///www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd
+                           http://www.springframework.org/schema/tx
+                           http://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context-4.2.xsd。
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/util
+                           http://www.springframework.org/schema/util/spring-util.xsd">-->
+    <!--连接池-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <!--基本配置-->
+        <property name="driverClassName" value="${jdbc.driverClass}"/>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+
+        <!--配置初始化大小 最小、最大-->
+        <property name="initialSize" value="${jdbc.init}"/>
+        <property name="minIdle" value="${jdbc.minIdle}"/>
+        <property name="maxActive" value="${jdbc.maxActive}"/>
+
+        <!--配置获取连接等待超时的时间 ms-->
+        <property name="maxWait" value="600000"/>
+
+        <!--配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位值毫秒-->
+        <property name="timeBetweenEvictionRunsMillis" value="600000"/>
+
+        <!--配置一个连接在池中最小的生存时间，单位是毫秒-->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+    </bean>
+
+    <!--SqlSessionFactory 该组件需要连接池的支持-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入连接池-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--注入dao-mapper文件信息，如果映射文件和dao接口 同包且同名，则此配置可以忽略-->
+        <property name="mapperLocations">
+            <list>
+                <value>classpath:ocm/pqn/comtroller/dao/UserDAO-Mapper.xml</value>
+            </list>
+        </property>
+        <!--为dao-mapper文件中的实体 定义缺省包路径-->
+        <!--如<select id="queryAll resultType="User" >中User类不可以定义包">-->
+        <!--凡是这个包下的实体都自动用类名做别名，设置好后映射文件中的resultType中的别名就有意义了-->
+        <property name="typeAliasesPackage" value="ocm.pqn.comtroller.entity"></property>
+    </bean>
+
+
+    <!--DAO要放入需要组件MapperScannerConfigurer 该组件需要SqlSessionFactory的支持-->
+    <bean id="mapperScannerConfigurer9" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--dao接口所在的包，如果有多个包，可以用逗号或分号间隔
+        <property name="basePackage" value="com.a.dao,com.b.dao"/>
+        -->
+        <property name="basePackage" value="ocm.pqn.comtroller.dao"/>
+        <!--如果工厂中只有一个SqlSessionFactory的bean，此配置可省略-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!--注解扫描-->
+    <context:component-scan base-package="ocm.pqn.comtroller" use-default-filters="true">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--1.引入一个事务管理器，其中依赖DataSource,借以获得连接，进而控制事务逻辑-->
+    <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+
+    <!--@Transational-->
+    <tx:annotation-driven transaction-manager="tx"></tx:annotation-driven>
+</beans>
