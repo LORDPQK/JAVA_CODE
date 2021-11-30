@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+    <!-- 开起注解扫描 -->
+    <context:component-scan base-package="ocm.pqn.comtroller" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!-- 视图解析器 -->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!-- 注解驱动，开起SpringMVC框架注解支持 -->
+    <mvc:annotation-driven/>
+
+    <!--静态资源访问设置: 增加一个额外的handler，且其requestMapping :"/**" 可以匹配所有请求，但是优先级最低
+    所以如果所有其他的handler都匹配不上，请求会转向“/**” ，恰好，这个handler就是处理静态资源的默认方式：
+    将请求会转到tomcat中名为default的Servlet-->
+    <mvc:default-servlet-handler></mvc:default-servlet-handler>
+</beans>
