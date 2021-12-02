@@ -29,68 +29,68 @@
                            http://www.springframework.org/schema/tx
                            http://www.springframework.org/schema/tx/spring-tx.xsd
                            http://www.springframework.org/schema/context
-                           http://www.springframework.org/schema/context/spring-context-4.2.xsd¡£
+                           http://www.springframework.org/schema/context/spring-context-4.2.xsdã€‚
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd
                            http://www.springframework.org/schema/util
                            http://www.springframework.org/schema/util/spring-util.xsd">-->
-    <!--Á¬½Ó³Ø-->
+    <!--è¿žæŽ¥æ± -->
     <context:property-placeholder location="classpath:jdbc.properties"/>
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
-        <!--»ù±¾ÅäÖÃ-->
+        <!--åŸºæœ¬é…ç½®-->
         <property name="driverClassName" value="${jdbc.driverClass}"/>
         <property name="url" value="${jdbc.url}"></property>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
 
-        <!--ÅäÖÃ³õÊ¼»¯´óÐ¡ ×îÐ¡¡¢×î´ó-->
+        <!--é…ç½®åˆå§‹åŒ–å¤§å° æœ€å°ã€æœ€å¤§-->
         <property name="initialSize" value="${jdbc.init}"/>
         <property name="minIdle" value="${jdbc.minIdle}"/>
         <property name="maxActive" value="${jdbc.maxActive}"/>
 
-        <!--ÅäÖÃ»ñÈ¡Á¬½ÓµÈ´ý³¬Ê±µÄÊ±¼ä ms-->
+        <!--é…ç½®èŽ·å–è¿žæŽ¥ç­‰å¾…è¶…æ—¶çš„æ—¶é—´ ms-->
         <property name="maxWait" value="600000"/>
 
-        <!--ÅäÖÃ¼ä¸ô¶à¾Ã²Å½øÐÐÒ»´Î¼ì²â£¬¼ì²âÐèÒª¹Ø±ÕµÄ¿ÕÏÐÁ¬½Ó£¬µ¥Î»ÖµºÁÃë-->
+        <!--é…ç½®é—´éš”å¤šä¹…æ‰è¿›è¡Œä¸€æ¬¡æ£€æµ‹ï¼Œæ£€æµ‹éœ€è¦å…³é—­çš„ç©ºé—²è¿žæŽ¥ï¼Œå•ä½å€¼æ¯«ç§’-->
         <property name="timeBetweenEvictionRunsMillis" value="600000"/>
 
-        <!--ÅäÖÃÒ»¸öÁ¬½ÓÔÚ³ØÖÐ×îÐ¡µÄÉú´æÊ±¼ä£¬µ¥Î»ÊÇºÁÃë-->
+        <!--é…ç½®ä¸€ä¸ªè¿žæŽ¥åœ¨æ± ä¸­æœ€å°çš„ç”Ÿå­˜æ—¶é—´ï¼Œå•ä½æ˜¯æ¯«ç§’-->
         <property name="minEvictableIdleTimeMillis" value="300000"/>
     </bean>
 
-    <!--SqlSessionFactory ¸Ã×é¼þÐèÒªÁ¬½Ó³ØµÄÖ§³Ö-->
+    <!--SqlSessionFactory è¯¥ç»„ä»¶éœ€è¦è¿žæŽ¥æ± çš„æ”¯æŒ-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <!--×¢ÈëÁ¬½Ó³Ø-->
+        <!--æ³¨å…¥è¿žæŽ¥æ± -->
         <property name="dataSource" ref="dataSource"></property>
-        <!--×¢Èëdao-mapperÎÄ¼þÐÅÏ¢£¬Èç¹ûÓ³ÉäÎÄ¼þºÍdao½Ó¿Ú Í¬°üÇÒÍ¬Ãû£¬Ôò´ËÅäÖÃ¿ÉÒÔºöÂÔ-->
+        <!--æ³¨å…¥dao-mapperæ–‡ä»¶ä¿¡æ¯ï¼Œå¦‚æžœæ˜ å°„æ–‡ä»¶å’ŒdaoæŽ¥å£ åŒåŒ…ä¸”åŒåï¼Œåˆ™æ­¤é…ç½®å¯ä»¥å¿½ç•¥-->
         <property name="mapperLocations">
             <list>
-                <value>classpath:ocm/pqn/comtroller/dao/*.xml</value>
+                <value>classpath:ocm/pqn/comtroller/dao/UserDAO-Mapper.xml</value>
             </list>
         </property>
-        <!--Îªdao-mapperÎÄ¼þÖÐµÄÊµÌå ¶¨ÒåÈ±Ê¡°üÂ·¾¶-->
-        <!--Èç<select id="queryAll resultType="User" >ÖÐUserÀà²»¿ÉÒÔ¶¨Òå°ü">-->
-        <!--·²ÊÇÕâ¸ö°üÏÂµÄÊµÌå¶¼×Ô¶¯ÓÃÀàÃû×ö±ðÃû£¬ÉèÖÃºÃºóÓ³ÉäÎÄ¼þÖÐµÄresultTypeÖÐµÄ±ðÃû¾ÍÓÐÒâÒåÁË-->
+        <!--ä¸ºdao-mapperæ–‡ä»¶ä¸­çš„å®žä½“ å®šä¹‰ç¼ºçœåŒ…è·¯å¾„-->
+        <!--å¦‚<select id="queryAll resultType="User" >ä¸­Userç±»ä¸å¯ä»¥å®šä¹‰åŒ…">-->
+        <!--å‡¡æ˜¯è¿™ä¸ªåŒ…ä¸‹çš„å®žä½“éƒ½è‡ªåŠ¨ç”¨ç±»ååšåˆ«åï¼Œè®¾ç½®å¥½åŽæ˜ å°„æ–‡ä»¶ä¸­çš„resultTypeä¸­çš„åˆ«åå°±æœ‰æ„ä¹‰äº†-->
         <property name="typeAliasesPackage" value="ocm.pqn.comtroller.entity"></property>
     </bean>
 
 
-    <!--DAOÒª·ÅÈëÐèÒª×é¼þMapperScannerConfigurer ¸Ã×é¼þÐèÒªSqlSessionFactoryµÄÖ§³Ö-->
+    <!--DAOè¦æ”¾å…¥éœ€è¦ç»„ä»¶MapperScannerConfigurer è¯¥ç»„ä»¶éœ€è¦SqlSessionFactoryçš„æ”¯æŒ-->
     <bean id="mapperScannerConfigurer9" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!--dao½Ó¿ÚËùÔÚµÄ°ü£¬Èç¹ûÓÐ¶à¸ö°ü£¬¿ÉÒÔÓÃ¶ººÅ»ò·ÖºÅ¼ä¸ô
+        <!--daoæŽ¥å£æ‰€åœ¨çš„åŒ…ï¼Œå¦‚æžœæœ‰å¤šä¸ªåŒ…ï¼Œå¯ä»¥ç”¨é€—å·æˆ–åˆ†å·é—´éš”
         <property name="basePackage" value="com.a.dao,com.b.dao"/>
         -->
         <property name="basePackage" value="ocm.pqn.comtroller.dao"/>
-        <!--Èç¹û¹¤³§ÖÐÖ»ÓÐÒ»¸öSqlSessionFactoryµÄbean£¬´ËÅäÖÃ¿ÉÊ¡ÂÔ-->
+        <!--å¦‚æžœå·¥åŽ‚ä¸­åªæœ‰ä¸€ä¸ªSqlSessionFactoryçš„beanï¼Œæ­¤é…ç½®å¯çœç•¥-->
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
 
-    <!--×¢½âÉ¨Ãè-->
+    <!--æ³¨è§£æ‰«æ-->
     <context:component-scan base-package="ocm.pqn.comtroller" use-default-filters="true">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!--1.ÒýÈëÒ»¸öÊÂÎñ¹ÜÀíÆ÷£¬ÆäÖÐÒÀÀµDataSource,½èÒÔ»ñµÃÁ¬½Ó£¬½ø¶ø¿ØÖÆÊÂÎñÂß¼­-->
+    <!--1.å¼•å…¥ä¸€ä¸ªäº‹åŠ¡ç®¡ç†å™¨ï¼Œå…¶ä¸­ä¾èµ–DataSource,å€Ÿä»¥èŽ·å¾—è¿žæŽ¥ï¼Œè¿›è€ŒæŽ§åˆ¶äº‹åŠ¡é€»è¾‘-->
     <bean id="tx" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>

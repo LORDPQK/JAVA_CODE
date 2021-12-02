@@ -10,22 +10,22 @@
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <!-- ¿ªÆð×¢½âÉ¨Ãè -->
+    <!-- å¼€èµ·æ³¨è§£æ‰«æ -->
     <context:component-scan base-package="ocm.pqn.comtroller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
-    <!-- ÊÓÍ¼½âÎöÆ÷ -->
+    <!-- è§†å›¾è§£æžå™¨ -->
     <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- ×¢½âÇý¶¯£¬¿ªÆðSpringMVC¿ò¼Ü×¢½âÖ§³Ö -->
+    <!-- æ³¨è§£é©±åŠ¨ï¼Œå¼€èµ·SpringMVCæ¡†æž¶æ³¨è§£æ”¯æŒ -->
     <mvc:annotation-driven/>
 
-    <!--¾²Ì¬×ÊÔ´·ÃÎÊÉèÖÃ: Ôö¼ÓÒ»¸ö¶îÍâµÄhandler£¬ÇÒÆärequestMapping :"/**" ¿ÉÒÔÆ¥ÅäËùÓÐÇëÇó£¬µ«ÊÇÓÅÏÈ¼¶×îµÍ
-    ËùÒÔÈç¹ûËùÓÐÆäËûµÄhandler¶¼Æ¥Åä²»ÉÏ£¬ÇëÇó»á×ªÏò¡°/**¡± £¬Ç¡ºÃ£¬Õâ¸öhandler¾ÍÊÇ´¦Àí¾²Ì¬×ÊÔ´µÄÄ¬ÈÏ·½Ê½£º
-    ½«ÇëÇó»á×ªµ½tomcatÖÐÃûÎªdefaultµÄServlet-->
+    <!--é™æ€èµ„æºè®¿é—®è®¾ç½®: å¢žåŠ ä¸€ä¸ªé¢å¤–çš„handlerï¼Œä¸”å…¶requestMapping :"/**" å¯ä»¥åŒ¹é…æ‰€æœ‰è¯·æ±‚ï¼Œä½†æ˜¯ä¼˜å…ˆçº§æœ€ä½Ž
+    æ‰€ä»¥å¦‚æžœæ‰€æœ‰å…¶ä»–çš„handleréƒ½åŒ¹é…ä¸ä¸Šï¼Œè¯·æ±‚ä¼šè½¬å‘â€œ/**â€ ï¼Œæ°å¥½ï¼Œè¿™ä¸ªhandlerå°±æ˜¯å¤„ç†é™æ€èµ„æºçš„é»˜è®¤æ–¹å¼ï¼š
+    å°†è¯·æ±‚ä¼šè½¬åˆ°tomcatä¸­åä¸ºdefaultçš„Servlet-->
     <mvc:default-servlet-handler></mvc:default-servlet-handler>
 </beans>
