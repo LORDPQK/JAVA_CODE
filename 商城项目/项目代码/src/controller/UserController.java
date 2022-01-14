@@ -1,5 +1,4 @@
 package controller;
-
 import entity.User;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
@@ -33,6 +32,7 @@ public class UserController extends BaseServlet {
             return Constants.HAS_USER;//不能注册
         }
         // 2.调用业务逻辑判断用户名是否存在
+
         UserService userService =new UserServiceImpl();
         boolean b = userService.checkedUser(username);
         // 3.响应字符串 1 存在 0 不存在

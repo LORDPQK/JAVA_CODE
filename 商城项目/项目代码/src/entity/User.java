@@ -26,8 +26,6 @@ public class User implements Serializable {
     private String code;//邮件激活
     private int urole;//用户代码：0 管理员代码：1
 
-
-
     public String getUsername() {
         return username;
     }
@@ -67,33 +65,24 @@ public class User implements Serializable {
     public String getUstatus() {
         return ustatus;
     }
-
     public void setUstatus(String ustatus) {
         this.ustatus = ustatus;
     }
-
     public int getUrole() {
         return urole;
     }
-
     public void setUid(int uid) {
         this.uid = uid;
     }
-
     public void setUpassword(String upassword) {
         this.upassword = upassword;
     }
-
     public void setUsex(String usex) {
         this.usex = usex;
     }
-
-
-
     public void setUrole(int urole) {
         this.urole = urole;
     }
-
     @Override
     public String toString() {
         return "User{" +
