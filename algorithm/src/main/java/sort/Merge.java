@@ -9,7 +9,7 @@ public class Merge {
     }
 
     private static void exchange(Comparable[] a,int i,int j){
-        Comparable t = a[j];
+        Comparable t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
