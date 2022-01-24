@@ -52,7 +52,7 @@ public class Joseph {
                 n = n.next;
             }
         }
-
+        System.out.println(n);
     }
 
     //节点类

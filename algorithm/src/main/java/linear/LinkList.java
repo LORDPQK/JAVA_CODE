@@ -137,8 +137,5 @@ public class LinkList <T>{
         curr.next = null;
         return curr;
     }
-
-
-
 }
 
