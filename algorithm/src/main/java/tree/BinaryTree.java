@@ -1,5 +1,7 @@
 package tree;
 
+import linear.Queue;
+
 //二叉查找树的实现及API
 public class BinaryTree<Key extends Comparable<Key>,Value>{
     //记录根节点
@@ -177,4 +179,87 @@ public class BinaryTree<Key extends Comparable<Key>,Value>{
         }
         return node;
     }
+
+
+
+   //前序遍历获得树中所有的键
+   public Queue<Key> preErgodic(){
+       Queue<Key> keys = new Queue<>();
+       preErgodic(root,keys);
+       return keys;
+   }
+
+   //获取指定树x的所有键，并放到keys队列中
+    private void preErgodic(Node x,Queue<Key> keys){
+        if(x==null) return ;
+
+        //把x节点的key放到keys中
+        keys.enqueue(x.key);
+
+        //递归遍历左子树
+        if(x.left!=null){
+            preErgodic(x.left,keys);
+        }
+
+        //递归遍历右子树
+        if(x.right!=null){
+            preErgodic(x.right,keys);
+        }
+    }
+
+    //中序遍历获得树中所有的键
+    public Queue<Key> pmidErgodic(){
+        Queue<Key> keys = new Queue<>();
+        midErgodic(root,keys);
+        return keys;
+    }
+
+    //获取指定树x的所有键，并放到keys队列中
+    private void midErgodic(Node x,Queue<Key> keys){
+        if(x==null) return ;
+
+        //递归遍历左子树
+        if(x.left!=null){
+            midErgodic(x.left,keys);
+        }
+
+        //把x节点的key放到keys中
+        keys.enqueue(x.key);
+
+        //递归遍历右子树
+        if(x.right!=null){
+            midErgodic(x.right,keys);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
