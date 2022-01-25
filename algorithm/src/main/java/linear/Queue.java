@@ -95,6 +95,11 @@ public class Queue <T> implements Iterable<T>{
             n =n.next;
             return n.item;
         }
+
+        @Override
+        public void remove() {
+
+        }
     }
 
 
