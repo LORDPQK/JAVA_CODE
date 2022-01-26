@@ -14,7 +14,7 @@ public class BinaryTreeErgodicTest {
         tree.put("H", "8");
         tree.put("C", "3");
 
-        Queue<String> keys = tree.preErgodic();
+        Queue<String> keys = tree.layerErgodic();
         for (String key : keys) {
             String value = tree.get(key);
             System.out.println(key + "-------" + value);
