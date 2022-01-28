@@ -8,7 +8,7 @@ public class Heap <T extends Comparable<T>>{
     private  int N ;
 
     public Heap(int capacity){
-        this.items = (T[]) new Object[capacity];
+        this.items = (T[]) new Comparable[capacity+1];
         this.N =0;
     }
 
@@ -77,12 +77,15 @@ public class Heap <T extends Comparable<T>>{
                 max = 2*k;
             }
 
-            if(less(max,k)){
-                exch(max,k);
-            }else{
+            //比较当前节点和较大节点的值
+            if(!less(k,max)){
                 break;
             }
 
+            //交换k索引处的值和max索引处的值
+            exch(k,max);
+
+            //变换k的指向
             k = max;
 
         }
