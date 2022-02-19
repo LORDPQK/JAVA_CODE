@@ -7,5 +7,7 @@ public class QuickTest {
         Integer[] a = {6,3,2,5,4,1};
         Quick.sort(a);
         System.out.println(Arrays.toString(a));
+
     }
+    
 }

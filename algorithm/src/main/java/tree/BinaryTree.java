@@ -2,6 +2,8 @@ package tree;
 
 import linear.Queue;
 
+import java.util.LinkedList;
+
 //二叉查找树的实现及API
 public class BinaryTree<Key extends Comparable<Key>,Value>{
     //记录根节点
@@ -189,9 +191,11 @@ public class BinaryTree<Key extends Comparable<Key>,Value>{
        return keys;
    }
 
+
+
    //获取指定树x的所有键，并放到keys队列中
     private void preErgodic(Node x,Queue<Key> keys){
-        if(x==null) return ;
+        if(x==null) return;
 
         //把x节点的key放到keys中
         keys.enqueue(x.key);
@@ -208,7 +212,7 @@ public class BinaryTree<Key extends Comparable<Key>,Value>{
     }
 
     //中序遍历获得树中所有的键
-    public Queue<Key> pmidErgodic(){
+    public Queue<Key> midErgodic(){
         Queue<Key> keys = new Queue<>();
         midErgodic(root,keys);
         return keys;
@@ -287,34 +291,8 @@ public class BinaryTree<Key extends Comparable<Key>,Value>{
         max = maxL>maxR?maxL+1:maxR+1;
 
         return max;
+
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

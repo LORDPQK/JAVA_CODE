@@ -50,7 +50,7 @@ public class Heap <T extends Comparable<T>>{
     public T delMax(){
         T max = items[1];
 
-        //交换索引i处的元素和最大索引处的元素，让完全二叉树中最右侧的元素变为临时根节点
+        //交换索引i处的元素和最大索引处的元素，让完全二叉树数组中最右侧的元素变为临时根节点
         exch(1,N);
         //删除最大元素
         items[N]= null;

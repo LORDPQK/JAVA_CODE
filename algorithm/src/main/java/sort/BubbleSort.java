@@ -19,6 +19,8 @@ public class BubbleSort {
             }
         }
 
+
+
     }
     //交换
     public static void exchange(Comparable[] a,int i,int j){

@@ -42,6 +42,9 @@ public class Merge {
         merge(a,low,mid,high);
     }
 
+
+
+
     //对数组中从low到mid为一组，mid+1到high为一组，对这两组数据进行归并
     private static void merge(Comparable[] a,int low,int mid ,int high){
         //定义三个指针，分别用于指向两个数组的首元素，和assist数组的首元素
@@ -71,5 +74,7 @@ public class Merge {
             a[j]=assist[j];
         }
     }
+
+
 
 }

@@ -68,4 +68,8 @@ public class Quick {
          exchange(a,low,right);
         return right;
     }
+
+
+
+
 }
